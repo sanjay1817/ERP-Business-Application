@@ -32,7 +32,7 @@ These are published on purpose and work **only** in the demo database. The compa
   - HSN rates with effective dates;
   - input-tax-credit classifications;
   - a GST reconciliation import;
-  - prepared GSTR-1 and GSTR-3B (*not filed*);
+  - GSTR-1 and GSTR-3B computed live (not filed);
 - DEMO e-invoices (one failed, one cancelled), DEMO e-way bills, vehicles and transport documents.
 
 Every e-invoice number starts with `DEMO-` and has no QR code. E-way bill numbers start with `DEMO`. None of them is a government record.
