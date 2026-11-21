@@ -1,0 +1,51 @@
+appId: com.lathatechnologies.sabusinesserp
+productName: SA Business ERP
+copyright: Copyright © 2026 Latha Technologies
+directories:
+  buildResources: build
+  output: release/${version}
+files:
+  - out/**/*
+  - package.json
+  - '!**/*.map'
+  # Development-only end-to-end and screenshot helpers are never shipped.
+  - '!out/main/chunks/dev-*.js'
+  # SQLite: ship only the Windows x64 N-API binary, not the C sources or other platforms.
+  - '!node_modules/better-sqlite3/deps/**'
+  - '!node_modules/better-sqlite3/src/**'
+  - '!node_modules/better-sqlite3/binding.gyp'
+  - '!node_modules/better-sqlite3/prebuilds/{darwin,linux,linuxmusl}-*.node'
+  - '!node_modules/better-sqlite3/prebuilds/win32-arm64.node'
+asarUnpack:
+  - node_modules/better-sqlite3/**/*
+# Electron fuses (flipped in the packaged executable):
+#  - the exe cannot be run as plain Node.js (ELECTRON_RUN_AS_NODE ignored)
+#  - NODE_OPTIONS / --inspect debugging switches are ignored
+#  - the app is only loaded from app.asar, whose integrity is validated
+#  - Chromium cookies are encrypted with OS keys (the app stores none, defence in depth)
+electronFuses:
+  runAsNode: false
+  enableNodeOptionsEnvironmentVariable: false
+  enableNodeCliInspectArguments: false
+  enableEmbeddedAsarIntegrityValidation: true
+  onlyLoadAppFromAsar: true
+  enableCookieEncryption: true
+  grantFileProtocolExtraPrivileges: true
+win:
+  icon: build/icon.ico
+  target:
+    - target: nsis
+      arch: [x64]
+  artifactName: SA-Business-ERP-Setup-${version}-x64.${ext}
+nsis:
+  oneClick: false
+  perMachine: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  shortcutName: SA Business ERP
+  # Company data lives in %APPDATA%\SA Business ERP and is never removed by uninstall or upgrade.
+  deleteAppDataOnUninstall: false
+  installerIcon: build/icon.ico
+  uninstallerIcon: build/icon.ico
+npmRebuild: false

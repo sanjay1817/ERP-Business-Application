@@ -1,0 +1,47 @@
+{
+  "name": "sa-business-erp",
+  "productName": "SA Business ERP",
+  "version": "0.5.0",
+  "description": "SA Business ERP - Enterprise Management (Windows desktop)",
+  "author": "Latha Technologies",
+  "private": true,
+  "main": "./out/main/index.js",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "node scripts/run-electron.cjs electron-vite dev",
+    "build": "electron-vite build",
+    "start": "npm run build && node scripts/run-electron.cjs electron .",
+    "preview": "node scripts/run-electron.cjs electron-vite preview",
+    "typecheck": "tsc --noEmit -p tsconfig.node.json && tsc --noEmit -p tsconfig.web.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:all": "npm run typecheck && npm run build && vitest run",
+    "dist:win": "npm run build && electron-builder --win --x64"
+  },
+  "dependencies": {
+    "better-sqlite3": "13.0.3",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "4.3.3",
+    "@types/better-sqlite3": "7.6.13",
+    "@types/node": "22.20.5",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "5.2.0",
+    "electron": "44.10.0",
+    "electron-builder": "26.18.1",
+    "electron-vite": "5.0.0",
+    "lucide-react": "1.65.0",
+    "react": "19.1.10",
+    "react-dom": "19.1.10",
+    "react-router-dom": "7.18.5",
+    "recharts": "3.10.1",
+    "tailwindcss": "4.3.3",
+    "typescript": "5.9.3",
+    "vite": "7.3.7",
+    "vitest": "3.2.7"
+  }
+}
